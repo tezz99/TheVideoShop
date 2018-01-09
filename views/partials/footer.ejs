@@ -1,0 +1,80 @@
+        <!-- ********************************** FOOTER ********************************** -->
+        <div class="container-fluid footer-container ">
+
+        </div>
+
+        <div class="modal loginmodal" id="login-modal">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+        				<h2 class="modal-title">Login</h2>
+        			</div>
+        			<div class="modal-body">
+        				<form action="/login" method="POST">
+				    		<div class="form-group">
+				    			<input type="text" name="username" class="form-control" placeholder="Username" required>
+				    		</div>
+				    		<div class="form-group">
+				    			<input type="password" name="password" class="form-control" placeholder="Password" required>
+				    		</div>
+				    		<input type="submit" class="btn btn-primary" value="Login">
+				    	</form>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+
+        <div class="modal loginmodal" id="register-modal">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+        				<h2 class="modal-title">Register</h2>
+        			</div>
+        			<div class="modal-body">
+        				<form action="/register" method="POST">
+				    		<div class="form-group">
+				    			<input type="text" name="username" class="form-control" placeholder="Username" required>
+				    		</div>
+				    		<div class="form-group">
+				    			<input type="email" name="email" class="form-control" placeholder="E-Mail" required>
+				    		</div>
+
+				    		<div class="form-group">
+				    			<input type="text" name="fName" class="form-control" placeholder="First Name" required>
+				    		</div>
+
+				    		<div class="form-group">
+				    			<input type="text" name="lName" class="form-control" placeholder="Last Name">
+				    		</div>
+
+				    		<div class="form-group">
+				    			<input type="password" name="password" class="form-control" placeholder="Password" required>
+				    		</div>
+				    		<div class="form-group">
+				    			<input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
+				    		</div>
+				    		<input type="submit" class="btn btn-primary" value="Signup and Login">
+				    	</form>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js " integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4 " crossorigin="anonymous "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX "></script>
+
+		<script>
+		$('#register-modal').find('form').on('submit', function(e) {
+			var $form = $(this)
+			var pass = $form.find('[name=password]').val()
+			var passconfirm = $form.find('[name=password_confirmation]').val()
+			if ( passconfirm !== pass ) {
+				alert( 'Passwords do not match.' )
+				e.preventDefault()
+			}
+		})
+		</script>
+    </body>
+
+</html>

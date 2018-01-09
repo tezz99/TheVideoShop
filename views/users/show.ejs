@@ -1,0 +1,57 @@
+<%include ../partials/header%>
+
+	<div class="container-fluid main-container admin-container">
+            <!--<div class="row">
+                <div class="col-sm-12">
+                    <h1 class="title">My Account - Username</h1>
+                </div>
+            </div>-->
+
+            <div class="row account-panel">
+            	<div class="col-sm-6 offset-sm-3">
+            		<h2>Account Info</h2>
+            		<div class="form-group"><input type="text" disabled class="form-control" value="<%=currentUser.username%>"></div>
+            		<div class="form-group"><input type="text" disabled class="form-control" value="<%=currentUser.email%>"></div>
+                    <div class="form-group"><input type="text" disabled class="form-control" value="<%=currentUser.fName%>"></div>
+                    <div class="form-group"><input type="text" disabled class="form-control" value="<%=currentUser.lName%>"></div>
+            		<div class="form-group"><a href="/users/<%=currentUser._id%>/edit" class="btn btn-primary float-right">Edit</a></div>
+            	</div>
+            </div>
+
+            <div class="row account-panel">
+            	<div class="col-sm-6 offset-sm-3">
+            		<dl>
+            			<dt>Session ID</dt>
+            			<dd>N/A</dd>
+            			<dt>Visit Count</dt>
+            			<dd>N/A</dd>
+            		</dl>
+            	</div>
+            </div>
+
+            <div class="row account-panel">
+            	<div class="col-sm-6 offset-sm-3">
+            		<h2>Recent Purchases</h2>
+            		<table class="table table-dark">
+            			<thead>
+        				<tr>
+            				<th>Movie Title</th>
+            				<th>Purchase Price</th>
+            			</tr>
+            		</thead>
+            			<tbody>
+							<% currentUser.purchases.forEach(function(purchase) { %>
+	            				<tr>
+	            					<td><%=purchase.name%></td>
+	            					<td><%var price = parseFloat(purchase.price).toFixed(2)%>$<%=price%></td>
+	            				</tr>
+	            			<% }); %>
+
+            			</tbody>
+            		</table>
+            	</div>
+            </div>
+
+        </div>
+
+<%include ../partials/footer%>

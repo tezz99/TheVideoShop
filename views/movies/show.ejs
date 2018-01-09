@@ -1,0 +1,84 @@
+<%include ../partials/header%>
+
+	<div class="container-fluid movie-container">
+
+
+		<div class="movie-admin-actions">
+			<!-- Only show edit and delete buttons if admin is logged in -->
+			<%if (currentUser && currentUser.username === "admin") {%>
+					<a href="/movies/<%= movie._id %>/edit" class="btn btn-secondary btn-sm">Edit</a>
+					<form id="delete" action="/movies/<%=movie._id%>?_method=DELETE" method="POST">
+						<button class="btn btn-secondary btn-sm">Delete</button>
+					</form>
+			<% } %>
+		</div>
+
+		<div class="movie">
+			<div class="movie__poster">
+				<img src="<%= movie.poster %>" />
+			</div>
+			<div class="movie__info">
+				<h1 class="movie__title">
+					<%= movie.title %>
+				</h1>
+				<h6>Overview</h6>
+				<p class="movie__description">
+					<%= movie.description %>
+				</p>
+				<div class="movie__actions">
+					<a href="#" class="btn btn-secondary">
+						<i class="fa fa-youtube-play" aria-hidden="true"></i> Watch Trailer
+					</a>
+	
+					<!-- delete form id is used for the css only. -->
+					<%if (currentUser) {%>
+						<form id="delete" action="/purchase/<%=movie._id%>/<%=currentUser._id%>/?_method=PUT" method="POST">
+							<button class="btn btn-primary"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Buy Now for $<%=movie.price%></button>
+						</form>
+					<% } else { %>
+						<form id="delete" action="/purchase/<%=movie._id%>/signin_required/?_method=PUT" method="POST">
+							<button class="btn btn-primary"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Buy Now for $<%=movie.price%></button>
+						</form>
+					<% } %>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="container-fluid reviews-container">
+		<div class="clearfix">
+			<h1 class="reviews-heading">Recent Reviews</h1>
+			<a href="/movies/<%=movie._id%>/reviews/new" class="btn btn-primary reviews-addbtn">Add Review</a> 
+		</div>
+
+		<ul class="reviews ">
+
+			<!-- Loop thorugh all movie reviews and display on page -->
+			<% movie.reviews.forEach(function(review) { %>
+				<li class="review ">
+					<div class="review__person ">
+						<%=review.author.username%>
+					</div>
+					<div class="review__info ">
+						<p class="review__text "><%=review.text%></p>
+						
+						<div class="review__actions ">
+
+							<%if (currentUser && currentUser.username === "admin") {%>
+								<!-- NEED TO ADD EJS TAGS IF YOU REACTIVATE THESE!!!!!!!!!!!! -->
+								<!-- <a href="/movies/movie._id/reviews/review._id/edit" class="btn btn-sm btn-secondary ">Edit</a>
+								<form id="delete" action="/movies/movie._id/reviews/review._id?_method=DELETE" method="POST">
+									<button class="btn btn-secondary btn-sm">Delete</button>
+								</form> -->
+							<% } %>
+						</div>
+
+					</div>
+				</li>
+			<%  }) %>
+		</ul>
+	</div>
+
+<%include ../partials/footer%>

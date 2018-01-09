@@ -1,0 +1,47 @@
+<!-- NOTE, THIS FILE IS NO LONGER USED! THE FORM HAS BEEN MOVED TO THE ADMIN PANEL. PLEASE EDIT THE ADMIN PANEL VIEW. -->
+
+<%include ../partials/header%>
+
+	<div class="container-fluid main-container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="title">Admin Panel</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h3 class="title">Add a Movie</h3>
+
+                    <div style="width: 25%; margin: 25px auto">
+                        <form action="/movies" method="POST">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="movie[title]" placeholder="Movie Name">
+                            </div>
+
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="movie[poster]" placeholder="Poster Url">
+                            </div>
+
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="movie[trailer]" placeholder="Youtube Trailer Url">
+                            </div>
+
+                            <div class="form-group">
+                                <!-- <input class="form-control" type="text" name="movie[description]" placeholder="Movie Description"> -->
+                                <textarea class="form-control" name="movie[description]">Movie Description</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-lg btn-primary btn-block">Submit</button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+<%include ../partials/footer%>

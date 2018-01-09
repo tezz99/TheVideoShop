@@ -1,0 +1,210 @@
+body {
+    background-image: url("images/bg.png");
+    background: #282931;
+    color: white;
+}
+
+
+
+/***************** NAVIGATION BAR *****************/
+
+.nav-container {
+    margin: auto;
+    background: #F8F9FA;
+    width: 80%;
+    padding: 0;
+}
+
+/***************** HOME PAGE *****************/
+
+.main-container {
+    margin: auto;
+    width: 80%;
+    background: #201E20;
+    min-height: 900px;
+    padding-bottom: 15px;
+}
+
+.title {
+    text-align: center;
+}
+
+.catalogue-row {
+    margin: auto;
+    padding: 15px 0;
+}
+
+.catalogue-item.col-centered {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.img-thumbnail {
+    width: 185px;
+    height: 278px;
+    margin-bottom: 10px;
+
+    border: 1px black solid;
+    box-shadow: 0;
+    border-radius: 0;
+    padding: 0;
+}
+
+.col-centered {
+    margin: 0 auto;
+}
+
+.load-more {
+    display: block;
+    margin: 0 auto;
+}
+
+
+
+/***************** MOVIES PAGE *****************/
+
+
+/** Movie Summary **/
+
+.movie-container {
+    width: 80%;
+    padding: 50px 0;
+    background: #201E20;
+    position: relative;
+}
+
+.movie-admin-actions {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 15px;
+}
+
+.movie {
+    overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.movie__poster {
+    max-width: 400px;
+    padding: 0 20px;
+    float: left;
+}
+
+.movie__poster img {
+    max-width: 100%;
+}
+
+.movie__info {
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+#delete {
+    display: inline;
+}
+
+/* Movie Edit Page */
+
+.movie-description {
+    height: 150px;
+}
+
+
+/** Reviews Section  **/
+
+.reviews-container {
+    width: 80%;
+    padding: 20px 50px;
+    background: #fefefe;
+    color: #222;
+}
+
+
+/*.reviews-heading, .reviews {
+    max-width: 860px;
+    margin: 0 auto;
+}*/
+
+.reviews-heading {
+    margin-bottom: 15px;
+    float: left;
+}
+
+.reviews-addbtn {
+    float: right;
+}
+
+
+.reviews {
+    list-style-type: none;
+    padding: 0;
+}
+
+.review {
+    border: 1px solid #d5ddf1;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.review__person {
+    float: left;
+    font-weight: 700;
+    width: 200px;
+}
+
+.review__info {
+    overflow: hidden;
+}
+
+.review__text {
+    margin: 0;
+}
+
+.review__actions {
+    margin-top: 20px;
+}
+
+.modal-dialog {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: auto;
+}
+@media(max-width: 768px) {
+  .modal-dialog {
+    min-height: calc(100vh - 20px);
+  }
+}
+
+/***************** FOOTER *****************/
+
+.footer-container {
+    margin: 0 auto;
+    width: 80%;
+    background: #F8F9FA;
+    height: 100px;
+}
+
+.loginmodal {
+    color: #222;
+}
+.admin-container {
+    overflow: hidden;
+}
+.admin-heading{
+    text-align: center;
+}
+.admin-user-actions {
+    text-align: right;
+}
+.account-panel {
+    margin-top: 25px;
+}
+
+
+.alert {
+    margin-bottom: 0;
+}
