@@ -10,11 +10,12 @@ var Movie = require("../models/movie");
 //Route for viewing movies
 router.get("/", function(req, res) {
 
+    //For ajax loading
     if (req.xhr) {
         var offset = (req.query.offset || 0) * 6
         Movie.find({}).skip(offset).limit(6).exec(function(err, movies) {
             if (err) {
-                console.log(err)
+                console.log(err);
             } else {
                 if (!movies.length) {
                     res.status(404)
@@ -43,7 +44,7 @@ router.get("/", function(req, res) {
 });
 
 
-//Route for adding new movies  -- **** MOVE FORM TO ADMIN PANEL LATER.
+//Route for adding new movies 
 router.get("/new", adminLoggedIn, function(req, res) {
     res.redirect("/admin");
 });
@@ -54,10 +55,11 @@ router.post("/", adminLoggedIn, function(req, res) {
     //Create the movie
     Movie.create(req.body.movie, function(err, newMovie) {
         if (err) {
-            res.render("new"); //****Make it so it shows error.
+            req.flash("error", "Error adding movie.");
+            res.render("new");
         } else {
             req.flash("success", "Movie Added - " + newMovie.title);
-            res.redirect("/admin")
+            res.redirect("/admin");
         }
     });
 });
@@ -73,7 +75,7 @@ router.get("/:id", function(req, res) {
             res.redirect("/movies"); //*** Show movie not found message later.
         } else {
             res.render("movies/show", {
-                movie: foundMovie
+                movie: foundMovie,
             });
         }
     });

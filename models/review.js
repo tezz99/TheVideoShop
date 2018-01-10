@@ -1,6 +1,5 @@
 var mongoose = require("mongoose");
 
-
 //Define the schema for a review
 var reviewSchema = new mongoose.Schema({
     text: String,

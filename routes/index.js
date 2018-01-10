@@ -6,9 +6,9 @@ var http = require("http");
 var Movie = require("../models/movie");
 
 
-//======================
-// ALL OTHER ROUTES
-//======================
+//======================================
+// THIS FILE IS FOR ALL "OTHER" ROUTES
+//======================================
 
 //Root Route
 router.get("/", function(req, res) {
@@ -21,7 +21,8 @@ router.get("/", function(req, res) {
 //====================
 //show register form
 router.get("/register", function(req, res) {
-    res.render("register");
+    req.flash("error", "Please Register using the link in the navigation bar below.");
+    res.redirect("/movies");
 });
 
 //handle signup logic
@@ -42,7 +43,7 @@ router.post("/register", function(req, res) {
 
 //show login form
 router.get("/login", function(req, res) {
-    req.flash("error", "Please Login using the link in the navbar.");
+    req.flash("error", "Please Login using the link in the navigation bar below.");
     res.redirect("/movies");
 });
 
@@ -80,7 +81,6 @@ router.get("/admin", adminLoggedIn, function(req, res) {
         }
     });
 });
-
 
 
 
@@ -230,19 +230,13 @@ router.get("/search/:searchterm", function(req, res) {
     })
 });
 
+
+//Weather route - fetches weather data (in json format) from API
 router.get("/weather", function(req, res) {
     http.get('http://api.openweathermap.org/data/2.5/weather?q=Wellington,NZ&APPID=c7f1b5c998bca751cce9c227ead33df8', function(w) {
         w.pipe(res)
     })
 })
-
-
-
-//LAST ROUTE - 404 NOT FOUND
-// router.use(function(req, res, next) {
-//     req.flash("error", "Error 404: The page you are looking for does not exist.");
-//     res.send("404");
-// })
 
 
 //=================

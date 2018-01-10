@@ -3,8 +3,6 @@
 
 	<div class="container-fluid main-container">
 
-        
-
 		<div class="row catalogue-row admin-heading">
               <div class="col-sm-12">
                     <h1 class="title">Admin Panel</h1>
@@ -58,10 +56,10 @@
                     </thead>
                     <tbody>
 
+                        <!-- Display all users apart from admin -->
                         <% users.forEach(function(user) { %>
-
                             <% if (user.username === "admin") { %>
-                                <% console.log("Skipping admin"); %>
+                                <% //console.log("Skipping admin"); %>
                             <% } else { %>
                                 <tr>
                                     <td><%= user.username %></td>

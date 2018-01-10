@@ -26,9 +26,14 @@
 					<%= movie.description %>
 				</p>
 				<div class="movie__actions">
-					<a href="#" class="btn btn-secondary">
+					<!-- <a data-toggle="modal" href="#trailer-modal" href="#" class="btn btn-secondary">
+						<i class="fa fa-youtube-play" aria-hidden="true"></i> Watch Trailer
+					</a> -->
+					
+					<a href="<%=movie.trailer%>" target="new" class="btn btn-secondary">
 						<i class="fa fa-youtube-play" aria-hidden="true"></i> Watch Trailer
 					</a>
+
 	
 					<!-- delete form id is used for the css only. -->
 					<%if (currentUser) {%>
@@ -65,7 +70,8 @@
 						<p class="review__text "><%=review.text%></p>
 						
 						<div class="review__actions ">
-
+							
+							<!-- Review edit and delete options deactivated. -->
 							<%if (currentUser && currentUser.username === "admin") {%>
 								<!-- NEED TO ADD EJS TAGS IF YOU REACTIVATE THESE!!!!!!!!!!!! -->
 								<!-- <a href="/movies/movie._id/reviews/review._id/edit" class="btn btn-sm btn-secondary ">Edit</a>

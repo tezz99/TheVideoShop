@@ -27,8 +27,7 @@ app.use(bodyParser.urlencoded({
 app.use(methodOverride("_method"));
 app.use(flash());
 
-seedDB(); //Seed the database. - DONT USE.
-
+//seedDB(); //Seed the database. - Clears the database (movies and reviews) and fills it with sample data.
 
 //PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -52,10 +51,17 @@ app.use(function(req, res, next) {
 });
 
 
+//Setup routes
 app.use(indexRoutes);
 app.use("/movies", movieRoutes);
 app.use("/movies/:id/reviews", reviewRoutes);
+app.use(redirectUnmatched); // redirect if nothing else sent a response
 
+//Setup Error 404 redirect
+function redirectUnmatched(req, res) {
+    req.flash("error", "Error 404: The page you requested cannot be found");
+    res.redirect("/movies");
+}
 
 
 //======================

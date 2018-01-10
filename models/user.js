@@ -16,5 +16,5 @@ var userSchema = new mongoose.Schema({
     }]
 });
 
-userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose); //For authentication
 module.exports = mongoose.model("User", userSchema); //Convert the schema into a model
