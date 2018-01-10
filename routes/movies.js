@@ -104,6 +104,23 @@ router.delete("/:id", adminLoggedIn, function(req, res) {
 });
 
 
+//MOVIES SEARCH ROUTE
+router.get("/search/:query") {
+    //Search for movie
+    Movie.find({/* Add queeryhere */}, function(err, foundMovies) {
+        if (err) {
+            console.log(err);
+        } else {
+            //show search results by rendering results page - make sure to send 
+        }
+    });
+
+}
+
+
+//SEARCH SHOW ROUTE
+
+
 //MIDDLEWARE - checks if user is logged in
 function adminLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {

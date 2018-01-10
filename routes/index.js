@@ -188,6 +188,10 @@ router.put("/purchase/:movie_id/:user_id", function(req, res) {
 
 
 
+
+
+
+
 //LAST ROUTE - 404 NOT FOUND
 
 
