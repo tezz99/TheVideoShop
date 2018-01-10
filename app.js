@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({
 app.use(methodOverride("_method"));
 app.use(flash());
 
-//seedDB(); //Seed the database. - DONT USE.
+seedDB(); //Seed the database. - DONT USE.
 
 
 //PASSPORT CONFIGURATION
@@ -47,6 +47,7 @@ app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
+    res.locals.active_page = "";
     next();
 });
 

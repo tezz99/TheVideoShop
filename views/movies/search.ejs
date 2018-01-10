@@ -1,0 +1,26 @@
+<%include ../partials/header%>
+
+<!-- ********************************** MAIN BODY ********************************** -->
+
+        <div class="container-fluid main-container">
+            <div class="row">
+	            <div class="col-sm-12">
+	            	<h2 class="search-heading">Search Results for: <%= searchterm %></h2>
+	            </div>
+	        </div>
+        	<% movies.forEach(function(movie){ %>
+				<div class="searchitem row">
+					<div class="searchitem__poster col-sm-1">
+						<a href="/movies/<%=movie._id%>">
+				       		<img class="searchitem__img rounded" src="<%=movie.poster%>" alt="<%=movie.title%>" >
+				      	</a>
+					</div>
+					<div class="seachitem__info col-sm-6">
+						<h2><a href="/movies/<%= movie.id %>"><%= movie.title %></a></h2>
+						<p><%= movie.description %></p>
+					</div>
+				</div>
+        	<% }) %>
+        </div>
+
+<%include ../partials/footer%>

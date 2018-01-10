@@ -9,6 +9,7 @@ var userSchema = new mongoose.Schema({
     fName: String,
     lName: String,
     email: String,
+    visits: Number,
     purchases: [{
         name: String,
         price: String

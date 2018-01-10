@@ -1,6 +1,23 @@
         <!-- ********************************** FOOTER ********************************** -->
-        <div class="container-fluid footer-container ">
-
+        <div class="container-fluid footer-container">
+			<div class="row">
+				<div class="col-3 col-lg-2">
+					<ul class="footer-list">
+						<li><a href="/privacy">Privacy</a></li>
+						<li><a href="/about">About Us</a></li>
+						<li><a href="/contact">Contact</a></li>
+					</ul>
+				</div>
+				<div class="col-3 col-lg-7">
+					<p class="copyright">&copy; Copyright 2018</p>
+				</div>
+				<div class="col-6 col-lg-3">
+					<div class="weather">
+						<span class="weather__icon" id="weather"></span>
+						<span class="weather__text">Wellington, NZ</span>
+					</div>
+				</div>
+			</div>
         </div>
 
         <div class="modal loginmodal" id="login-modal">
@@ -60,7 +77,7 @@
         	</div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js " integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4 " crossorigin="anonymous "></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX "></script>
 
@@ -74,6 +91,42 @@
 				e.preventDefault()
 			}
 		})
+		</script>
+
+		<script>
+			var $loadmoreBtn = $('.load-more')
+			var offset = $loadmoreBtn.data('offset')
+			$loadmoreBtn.on('click', function(e) {
+				$.ajax({
+					method: 'GET',
+					url: '/movies?offset=' + offset,
+				}).done(function(movies){
+					offset++
+					$loadmoreBtn.before(movies)
+				}).fail(function(jqXHR) {
+					if (404 === jqXHR.status) {
+						return $loadmoreBtn.remove()
+					}
+					alert('Something went wrong. Try again.')
+				})
+			})
+		</script>
+
+		<script>
+			$('#search').on('submit', function(e) {
+				e.preventDefault()
+				location.href = '/search/' + $('#s').val()
+			})
+		</script>
+
+		<script>
+			$.get('/weather')
+				.done(function(res){
+					res = JSON.parse(res)
+					if (res.weather.length) {
+						$('#weather').html('<i class="owi owi-' + res.weather[0].icon +'"></i>')
+					}
+				})
 		</script>
     </body>
 

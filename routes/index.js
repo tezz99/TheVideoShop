@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router(); //will add all routes to the router rather than the app it self.
 var passport = require("passport");
 var User = require("../models/user");
+var http = require("http");
 var Movie = require("../models/movie");
 
 
@@ -47,12 +48,12 @@ router.get("/login", function(req, res) {
 
 //Handle login logic. Note the authentication middleware. 
 router.post("/login", passport.authenticate("local", {
-    successRedirect: "back",
     failureRedirect: "/movies",
     failureFlash: "Login Failed - Please check username or password",
     successFlash: "Successfully Logged In"
 }), function(req, res) {
-
+    User.findOneAndUpdate({ _id: req.user._id }, { $inc: { visits: 1 } }).exec()
+    res.redirect('back')
 });
 
 
@@ -89,7 +90,9 @@ router.get("/admin", adminLoggedIn, function(req, res) {
 
 //SHOW ROUTE - Display my account //FIXME: add middleware?
 router.get("/users/:user_id", isLoggedIn, function(req, res) {
-    res.render("users/show");
+    res.render("users/show", {
+        sessionID: req.sessionID
+    });
 });
 
 
@@ -187,14 +190,59 @@ router.put("/purchase/:movie_id/:user_id", function(req, res) {
 });
 
 
+//About Us route
+router.get("/about", function(req, res) {
+    res.render("about", {
+        active_page: 'about'
+    });
+});
+
+//Contact Us route
+router.get("/contact", function(req, res) {
+    res.render("contact", {
+        active_page: 'contact'
+    });
+});
+
+//Privacy route
+router.get("/privacy", function(req, res) {
+    res.render("privacy", {
+        active_page: 'privacy'
+    });
+});
 
 
+
+
+//=================
+// SEARCH ROUTES
+//=================
+router.get("/search/:searchterm", function(req, res) {
+    Movie.find({ $text: { $search: req.params.searchterm } }, function(err, movies) {
+        if (err) {
+            return console.log(err)
+        }
+
+        res.render("movies/search", {
+            movies: movies,
+            searchterm: req.params.searchterm,
+        })
+    })
+});
+
+router.get("/weather", function(req, res) {
+    http.get('http://api.openweathermap.org/data/2.5/weather?q=Wellington,NZ&APPID=c7f1b5c998bca751cce9c227ead33df8', function(w) {
+        w.pipe(res)
+    })
+})
 
 
 
 //LAST ROUTE - 404 NOT FOUND
-
-
+// router.use(function(req, res, next) {
+//     req.flash("error", "Error 404: The page you are looking for does not exist.");
+//     res.send("404");
+// })
 
 
 //=================

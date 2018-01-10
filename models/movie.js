@@ -13,4 +13,6 @@ var movieSchema = new mongoose.Schema({
     }]
 });
 
+movieSchema.index({ title: 'text', description: 'text' })
+
 module.exports = mongoose.model("Movie", movieSchema); //Convert the schema into a model

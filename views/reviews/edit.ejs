@@ -7,7 +7,8 @@
 	    		
 				<form action="/movies/<%=movie_id%>/reviews/<%=review._id%>?_method=PUT" method="POST">
 					<div class="form-group">
-						<input class="form-control" type="text" name="review[text]" value="<%=review.text%>">
+						<textarea class="form-control review-height" name="review[text]">Review Here</textarea>
+						<!-- <input class="form-control" type="text" name="review[text]" value="<%=review.text%>"> -->
 					</div>
 
 					<div class="form-group">

@@ -29,18 +29,9 @@
             </div>
 
             <h1 class="title">Latest Releases</h1>
-            <div class="row catalogue-row">
-            	<%movies.forEach(function(movie) {%>
-	            	<div class="col-lg-2 col-md-4 col-xs-6 col-centered catalogue-item">
-	                    <a href="/movies/<%=movie._id%>">
-			           		<img class="img-thumbnail rounded" src="<%=movie.poster%>" alt="<%=movie.title%>" >
-			          	</a>
-	                </div>
-            	<%});%>
+        	<%include ./row %>
 
-            </div>
-
-            <button type="button" class="btn btn-primary load-more">Load More</button>
+            <button type="button" class="btn btn-primary load-more" data-offset="1">Load More</button>
 
         </div>
 

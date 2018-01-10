@@ -7,7 +7,8 @@
 	    		
 				<form action="/movies/<%=movie._id%>/reviews" method="POST">
 					<div class="form-group">
-						<input class="form-control" type="text" name="review[text]" placeholder="comment">
+						<textarea class="form-control review-height" name="review[text]">Review Here</textarea>
+						<!-- <input class="form-control" type="text" name="review[text]" placeholder="Review"> -->
 					</div>
 
 					<div class="form-group">

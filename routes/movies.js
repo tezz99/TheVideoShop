@@ -10,15 +10,36 @@ var Movie = require("../models/movie");
 //Route for viewing movies
 router.get("/", function(req, res) {
 
-    Movie.find({}, function(err, movies) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.render("movies/index", {
-                movies: movies
-            });
-        }
-    });
+    if (req.xhr) {
+        var offset = (req.query.offset || 0) * 6
+        Movie.find({}).skip(offset).limit(6).exec(function(err, movies) {
+            if (err) {
+                console.log(err)
+            } else {
+                if (!movies.length) {
+                    res.status(404)
+                    res.end()
+                } else {
+                    res.render("movies/row", {
+                        movies: movies,
+                        active_page: "home"
+                    })
+                }
+
+            }
+        })
+    } else {
+        Movie.find({}).limit(6).exec(function(err, movies) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.render("movies/index", {
+                    movies: movies,
+                    active_page: "home"
+                });
+            }
+        });
+    }
 });
 
 
@@ -28,7 +49,7 @@ router.get("/new", adminLoggedIn, function(req, res) {
 });
 
 
-//CREATE Route (POST) for adding new movie
+//CREATE Route (POST) for adding new movie 
 router.post("/", adminLoggedIn, function(req, res) {
     //Create the movie
     Movie.create(req.body.movie, function(err, newMovie) {
@@ -103,22 +124,6 @@ router.delete("/:id", adminLoggedIn, function(req, res) {
     });
 });
 
-
-//MOVIES SEARCH ROUTE
-router.get("/search/:query") {
-    //Search for movie
-    Movie.find({/* Add queeryhere */}, function(err, foundMovies) {
-        if (err) {
-            console.log(err);
-        } else {
-            //show search results by rendering results page - make sure to send 
-        }
-    });
-
-}
-
-
-//SEARCH SHOW ROUTE
 
 
 //MIDDLEWARE - checks if user is logged in
