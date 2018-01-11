@@ -18,7 +18,8 @@ var reviewRoutes = require("./routes/reviews"),
 
 
 //App Configuration
-mongoose.connect("mongodb://localhost/video_shop_app"); //Connect to database. Will create a new DB if one does not exist.
+// mongoose.connect("mongodb://localhost/video_shop_app"); //Connect to local database. Will create a new DB if one does not exist.
+mongoose.connect("mongodb://tezz99:passw0rd01@ds249787.mlab.com:49787/thevideoshop"); // Connect to remote (mLab) database.
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({
