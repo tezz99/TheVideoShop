@@ -1,4 +1,4 @@
-# The Video Shop  - (NWEN438 Project 1)
+# The Video Shop (NWEN438 Project 1)
 **[The Video Shop](https://thevideoshop.herokuapp.com/)** is a web application developed for a NWEN438 assignment. It is a fully featured web application which utilises ExpressJS as its back-end framework, and is hosted on Heroku (PAAS). The website utilises a persistent database and features a range of requires set by the assignment outline''.
 
 **General Notes**
