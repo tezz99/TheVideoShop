@@ -37,6 +37,7 @@
      2. cd to project directory
      3. npm install
      4. node app
+     5. open localhost:3000
 
 To access the web application *online*, visit: 
 >http://thevideoshop.herokuapp.com
