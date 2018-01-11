@@ -130,6 +130,7 @@ hr {
     padding: 50px 0;
     background: #201E20;
     position: relative;
+
 }
 
 .movie-admin-actions {
@@ -153,6 +154,10 @@ hr {
 
 .movie__poster img {
     max-width: 100%;
+}
+
+.poster-img {
+    border-radius: 5px;
 }
 
 .movie__info {
