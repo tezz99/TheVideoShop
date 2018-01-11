@@ -68,6 +68,6 @@ function redirectUnmatched(req, res) {
 //======================
 // STRAT THE SERVER
 //======================
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
     console.log("The Video Shop Application Started on port 3000");
 })
