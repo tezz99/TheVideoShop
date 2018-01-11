@@ -3,7 +3,6 @@
 
 **General Notes**
  - Movie data is compiled from TheMovieDB
- - All images used in the application are royalty free.
  - An admin account is required to access the admin panel. 
 
 
