@@ -12,14 +12,14 @@
  - Authentication - user registration and login
  - RESTful routes
  - Movie catalogue
- - Search
+ - Search catalogue
  - Add reviews to movies
  - Edit movies in catalogue (ad admin)
  - Remove movies from catalogue (as admin)
  - Purchase movies
- - AJAX Load More
+ - AJAX load more (reload without refreshing)
  - Navigation
- - Wellington Weather detail using OpenWeatherMap API
+ - Wellington weather using OpenWeatherMap API
  - Admin Panel:
 	 - Add movies to catalogue
 	 - Edit user details
@@ -65,6 +65,7 @@ To access the web application *online*, visit:
  - [passport-local](https://www.npmjs.com/package/passport-local)
  - [passport-local-mongoose](https://www.npmjs.com/package/passport-local-mongoose)
  - [open-weather-icons](https://www.npmjs.com/package/open-weather-icons)
+ - [Font Awesome](http://fontawesome.io/)
 
 
 ## Authors
