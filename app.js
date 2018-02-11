@@ -14,7 +14,8 @@ var express = require("express"),
 //Requring routes
 var reviewRoutes = require("./routes/reviews"),
     movieRoutes = require("./routes/movies"),
-    indexRoutes = require("./routes/index");
+    indexRoutes = require("./routes/index"),
+    apiRoutes = require("./routes/api");
 
 
 //App Configuration
@@ -56,6 +57,7 @@ app.use(function(req, res, next) {
 app.use(indexRoutes);
 app.use("/movies", movieRoutes);
 app.use("/movies/:id/reviews", reviewRoutes);
+app.use("/api", apiRoutes);
 app.use(redirectUnmatched); // redirect if nothing else sent a response
 
 //Setup Error 404 redirect
