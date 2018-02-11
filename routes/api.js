@@ -12,11 +12,6 @@ router.get('/movies', function(req, res, next) {
 	})
 });
 
-
-
-//I THINK YOU HAVE TO POPULATE REVIEWS FIRST...
-//Movie.findById(req.params.id).populate("reviews").exec(function(err, foundMovie) {
-
 router.get('/movies/:id', function(req, res, next) {
 	Movie.find({_id: req.params.id}, function(err, movie) {
 		if (err) return res.status(404).json({
@@ -28,7 +23,21 @@ router.get('/movies/:id', function(req, res, next) {
 })
 
 router.get('/reviews/:id', function(req, res, next) {
+	Movie.findById(req.params.id).populate('reviews').exec(function(err, movie) {
+		if (err) return res.status(404).json({
+			error: 'Movie ID not found'
+		})
 
+		res.json(movie.reviews)
+	})
+})
+
+router.get('/search', function(req, res, next) {
+	Movie.find({ $text: { $search: req.query.q } }, function(err, movies) {
+        if (err) return next(err)
+
+        res.json(movies)
+    })
 })
 
 module.exports = router
