@@ -1,6 +1,8 @@
-var express = require("express");
+var express = require("express"),
+	passport = require("passport")
 var router = express.Router(); //will add all routes to the router rather than the app it self.
-var Movie = require("../models/movie");
+var Movie = require("../models/movie"),
+	User = require("../models/user");
 
 router.get('/movies', function(req, res, next) {
 	var fields = req.query.fields || []
@@ -39,5 +41,13 @@ router.get('/search', function(req, res, next) {
         res.json(movies)
     })
 })
+
+//Handle login logic. Note the authentication middleware. 
+router.post("/login", passport.authenticate("local", {
+}), function(req, res) {
+    User.findOneAndUpdate({ _id: req.user._id }, { $inc: { visits: 1 } }).exec()
+    console.log(res.headersSent)
+    res.status(200).end()
+});
 
 module.exports = router
