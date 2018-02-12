@@ -5,7 +5,7 @@ var Movie = require("../models/movie"),
 	User = require("../models/user");
 
 router.get('/movies', function(req, res, next) {
-	var fields = req.query.fields || []
+	var fields = req.query.fields || ''
 	fields = fields.split(',').join(' ')
 	Movie.find({}, fields, function(err, movies) {
 		if (err) return next(err)
@@ -18,6 +18,28 @@ router.get('/movies/:id', function(req, res, next) {
 	Movie.find({_id: req.params.id}, function(err, movie) {
 		if (err) return res.status(404).json({
 			error: 'Movie ID not found'
+		})
+
+		res.json(movie)
+	})
+})
+
+router.post('/movies/:id/buy', requireAuth, function(req, res, next) {
+	Movie.find({_id: req.params.id}, function(err, movie) {
+		if (err) return res.status(404).json({
+			error: 'Movie ID not found'
+		})
+
+		User.findById(req.user._id, function(err, user) {
+			if (err) return next(err)
+
+			user.purchases.push({
+				name: movie.title,
+				price: movie.price
+			})
+			user.save()
+
+			res.status(200).end()
 		})
 
 		res.json(movie)
@@ -43,11 +65,34 @@ router.get('/search', function(req, res, next) {
 })
 
 //Handle login logic. Note the authentication middleware. 
-router.post("/login", passport.authenticate("local", {
+router.post("/users/login", passport.authenticate("local", {
 }), function(req, res) {
     User.findOneAndUpdate({ _id: req.user._id }, { $inc: { visits: 1 } }).exec()
-    console.log(res.headersSent)
     res.status(200).end()
 });
+
+router.post("/users/register", function(req, res, next) {
+	var newUser = new User({ username: req.body.username, email: req.body.email, fName: req.body.fName, lName: req.body.lName });
+    User.register(newUser, req.body.password, function(err, user) {
+        if (err) return res.status(400).json({
+        	error: err.message
+        })
+
+        passport.authenticate("local")(req, res, function() {
+            res.status(200).end()
+        });
+    });
+})
+
+router.get("/users/me", requireAuth, function(req, res, next) {
+	res.json(req.user)
+})
+
+function requireAuth(req, res, next) {
+	if (req.isAuthenticated()) return next()
+	res.status(403).json({
+		error: 'You are not logged in'
+	})
+}
 
 module.exports = router
