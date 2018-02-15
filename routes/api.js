@@ -25,7 +25,7 @@ router.get('/movies/:id', function(req, res, next) {
 })
 
 router.post('/movies/:id/buy', requireAuth, function(req, res, next) {
-	Movie.find({_id: req.params.id}, function(err, movie) {
+	Movie.findById(req.params.id, function(err, movie) {
 		if (err) {
 			return res.status(404).json({
 				error: 'Movie ID not found'
