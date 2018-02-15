@@ -1,0 +1,16 @@
+API:
+Movie Catalogue (GET Request) - https://thevideoshop.herokuapp.com/api/movies OR movies?fields=title,poster
+
+Movie Search (GET Request)- https://thevideoshop.herokuapp.com/api/search?q=SEARCHITEMHERE
+
+Movie Details (GET Request) - https://thevideoshop.herokuapp.com/api/movies/5a56f7484ab3f400144506cf
+
+Reviews (GET Requet) - https://thevideoshop.herokuapp.com/api/reviews/5a56f59c4ab3f400144506c3
+
+Login (send POST request, with the fields "username" and "password", statuscode 401 in response if invalid credentials and "unauthorised" body) - https://thevideoshop.herokuapp.com/api/users/login
+
+My Account (GET Request to this url) - https://thevideoshop.herokuapp.com/api/users/me
+
+Buy Now (POST request at (Must be logged in otherwise error will be sent)) -  https://thevideoshop.herokuapp.com/api/movies/:id/buy
+
+Register (POST request (urlencoded) with fields "username", password"email", "fName", "lName") - https://thevideoshop.herokuapp.com/api/users/register
