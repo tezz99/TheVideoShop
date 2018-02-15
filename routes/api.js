@@ -26,19 +26,25 @@ router.get('/movies/:id', function(req, res, next) {
 
 router.post('/movies/:id/buy', requireAuth, function(req, res, next) {
 	Movie.find({_id: req.params.id}, function(err, movie) {
-		if (err) return res.status(404).json({
-			error: 'Movie ID not found'
-		})
-
-		User.findById(req.user._id, function(err, user) {
-			if (err) return next(err)
-
-			user.purchases.push({
-				name: movie.title,
-				price: movie.price
+		if (err) {
+			return res.status(404).json({
+				error: 'Movie ID not found'
 			})
-			user.save()
+		}
 
+		var purchase = {
+			name: movie.title,
+			price: movie.price
+		}
+
+		//Find user that is purchasing the movie.
+		User.findById(req.user._id, function(err, user) {
+			if (err) {
+				return next (err);
+			}
+
+			user.purchases.push(purchase)
+			user.save();
 			res.status(200).end()
 		})
 
